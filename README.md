@@ -21,6 +21,20 @@ Install dependencies
 venv/scripts/activate
 pip install -r -requirements.txt
 ```
+Create .env file with following content
+```python
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=yourdbname
+DB_USER=postgres
+DB_PASS=yourdbpass
+
+SECRET_KEY=SECRET
+```
+Run migration
+```python
+alembic upgrade head
+```
 
 Run app
 ```python
