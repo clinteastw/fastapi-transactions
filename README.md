@@ -1,5 +1,5 @@
 # Transactions processing app
-Fastapi app that emulates the processing of a webhook from a third-party payment system.
+FastAPI app that emulates the processing of a webhook from a third-party payment system.
 
 ### Features
 
