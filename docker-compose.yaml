@@ -1,0 +1,50 @@
+networks:
+  dev:
+
+
+services:
+  app:
+      container_name: fastapi_transactions_app
+      build: 
+        context: .
+        dockerfile: Dockerfile
+      command: python3 src/main.py
+      volumes:
+        - ./src:/app/src
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+      restart: always
+      env_file:
+        - .env
+      environment:
+        - DB_USER=postgres
+        - DB_PASSWORD=yourdbpass
+        - DB_DATABASE=yourdbname
+        - DB_PORT=5432
+        - DB_HOST=db
+      
+      networks:
+        - dev
+                
+
+  db:
+    container_name: fastapi_transactions_postgres
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+        - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourdbpass
+      POSTGRES_DB: yourdbname
+    ports:
+      - "5433:5432"
+    restart: always
+    networks:
+        - dev
+
+volumes:
+  postgres_data:
